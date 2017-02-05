@@ -1,0 +1,179 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Test Cases ***
+Open Browser
+    Open Browser    http://localhost:8020/OnlineShopProject/
+
+Sign Up
+    Click Element    xpath=.//*[@id='nav']/ul/li[1]/a
+    Input Text    xpath=.//*[@id='username']    user4
+    Input Password    xpath=.//*[@id='password']    123
+    Input Password    xpath=.//*[@id='confirm_password']    123
+    Click Element    xpath=.//*[@id='command']/div[5]/input
+
+Sign Up Error Password Mismatch
+    Click Element    xpath=.//*[@id='nav']/ul/li[1]/a
+    Input Text    xpath=.//*[@id='username']    user4
+    Input Password    xpath=.//*[@id='password']    123
+    Input Password    xpath=.//*[@id='confirm_password']    2345
+    Click Element    xpath=.//*[@id='command']/div[5]/input
+
+Login as Admin
+    Click Element    xpath=.//*[@id='nav']/ul/li[2]/a
+    Input Text    xpath=.//*[@id='username']    admin
+    Input Password    xpath=.//*[@id='password']    123
+    Click Element    xpath=.//*[@id='content']/form/div[3]/input
+
+Admin View Accounts
+    Click Element    xpath=html/body/center/ul/li[2]/h3/i/a
+
+Admin Delete Account
+    Click Element    xpath=html/body/center/ul/li[2]/h3/i/a
+    Click Element    xpath=.//*[@id='command']/input[2]
+
+Admin Add Product
+    Click Element    xpath=html/body/center/ul/li[1]/h3/i/a
+    Input Text    xpath=.//*[@id='productId']    F001
+    Input Text    xpath=.//*[@id='productName']    Fridge one
+    Input Text    xpath=.//*[@id='productPrice']    45000
+    Input Text    xpath=.//*[@id='productQuantity']    50
+    Click Button    xpath=.//*[@id='command']/table/tbody/tr[6]/td/input
+
+Admin Edit Product
+    Click Element    xpath=.//*[@id='command']/input[2]
+    Input Text    xpath=.//*[@id='productName']    Fridge 1
+    Input Text    xpath=.//*[@id='productPrice']    56000
+    Input Text    xpath=.//*[@id='productQuantity']    45
+    Click Button    xpath=.//*[@id='command']/table/tbody/tr[6]/td/input
+
+Admin Delete Product
+    Click Button    xpath=.//*[@id='command']/input[2]
+
+Admin add product numeric error
+    Click Element    xpath=html/body/center/ul/li[1]/h3/i/a
+    Input Text    xpath=.//*[@id='productId']    F001
+    Input Text    xpath=.//*[@id='productName']    Fridge one
+    Input Text    xpath=.//*[@id='productPrice']    aaa
+    Input Text    xpath=.//*[@id='productQuantity']    bbb
+    Click Button    xpath=.//*[@id='command']/table/tbody/tr[6]/td/input
+
+Admin edit product numeric error
+    Click Element    xpath=.//*[@id='command']/input[2]
+    Input Text    xpath=.//*[@id='productName']    Fridge 1
+    Input Text    xpath=.//*[@id='productPrice']    jjj
+    Input Text    xpath=.//*[@id='productQuantity']    ghj
+    Click Button    xpath=.//*[@id='command']/table/tbody/tr[6]/td/input
+
+Admin Add Existing Product Error
+    Click Element    xpath=html/body/center/ul/li[1]/h3/i/a
+    Input Text    xpath=.//*[@id='productId']    T001
+    Input Text    xpath=.//*[@id='productName']    TV ONE
+    Input Text    xpath=.//*[@id='productPrice']    3456
+    Input Text    xpath=.//*[@id='productQuantity']    40
+    Click Button    xpath=.//*[@id='command']/table/tbody/tr[6]/td/input
+
+Admin add product error existing
+    Click Element    xpath=html/body/center/ul/li[1]/h3/i/a
+    Input Text    xpath=.//*[@id='productId']    F001
+    Input Text    xpath=.//*[@id='productName']    Fridge one
+    Input Text    xpath=.//*[@id='productPrice']    45000
+    Input Text    xpath=.//*[@id='productQuantity']    50
+    Click Button    xpath=.//*[@id='command']/table/tbody/tr[6]/td/input
+
+Admin View Orders
+    Click Element    xpath=html/body/center/ul/li[3]/h3/i/a
+    Click Element    xpath=.//*[@id='command']/input[12]
+
+Sign Up error Existing User
+    Click Element    xpath=.//*[@id='nav']/ul/li[1]/a
+    Input Text    xpath=.//*[@id='username']    aarthi
+    Input Password    xpath=.//*[@id='password']    123
+    Input Password    xpath=.//*[@id='confirm_password']    123
+    Click Element    xpath=.//*[@id='command']/div[5]/input
+    Click Element    xpath=html/body/center/h3/a
+
+Login as customer
+    Click Element    xpath=.//*[@id='nav']/ul/li[2]/a
+    Input Text    xpath=.//*[@id='username']    aarthi
+    Input Password    xpath=.//*[@id='password']    123
+    Click Element    xpath=.//*[@id='content']/form/div[3]/input
+
+Customer view Order
+    Click Element    xpath=html/body/center/ul/li/h3
+    Click Button    xpath=.//*[@id='command']/input[12]
+
+Open Menu
+    Click Element    xpath=.//*[@id='main']/span
+
+Open All Products
+    Wait Until Element Is Visible    xpath=.//*[@id='submenu1']/li[1]/a    2 mins
+    Click Element    xpath=.//*[@id='submenu1']/li[1]/a
+
+Open Tv
+    Wait Until Element Is Visible    xpath=.//*[@id='submenu1']/li[2]/a    2 mins
+    Click Element    xpath=.//*[@id='submenu1']/li[2]/a
+
+open Fridge
+    Wait Until Element Is Visible    xpath=.//*[@id='submenu1']/li[3]/a    2 mins
+    Click Element    xpath=.//*[@id='submenu1']/li[3]/a
+
+Open Washing Machine
+    Wait Until Element Is Visible    xpath=.//*[@id='submenu1']/li[4]/a    2 mins
+    Click Element    xpath=.//*[@id='submenu1']/li[4]/a
+
+Open Laptop
+    Wait Until Element Is Visible    xpath=.//*[@id='submenu1']/li[5]/a    2 mins
+    Click Element    xpath=.//*[@id='submenu1']/li[5]/a
+
+Open AC
+    Wait Until Element Is Visible    xpath=.//*[@id='submenu1']/li[6]/a    2 mins
+    Click Element    xpath=.//*[@id='submenu1']/li[6]/a
+
+Customer Add Products to Cart
+    Click Element    xpath=.//*[@id='command']/input[4]
+
+Update Quantity
+    Input Text    xpath=.//*[@id='productQuan']    2
+    Click Button    xpath=.//*[@id='command']/input[6]
+
+Update Quantity Error
+    Input Text    xpath=.//*[@id='productQuan']    50
+    Click Button    xpath=.//*[@id='command']/input[6]
+
+Delete Product from cart
+    Click Element    xpath=.//*[@id='command']/input[2]
+
+Place Order
+    Click Element    xpath=html/body/table/tbody/tr[5]/td/a
+
+Entering Customer Information
+    Input Text    xpath=.//*[@id='customerName']    aarthi
+    Input Text    xpath=.//*[@id='customerEmailId']    aarthi@gmail.com
+    Input Text    xpath=.//*[@id='phno']    987546776
+    Input Text    xpath=.//*[@id='customerAddress']    chennai
+    Click Button    xpath=.//*[@id='command']/table/tbody/tr[6]/td/input
+    Click Button    xpath=.//*[@id='command']/input[12]
+
+Error Entering Customer Information
+    Input Text    xpath=.//*[@id='customerName']    123
+    Input Text    xpath=.//*[@id='customerEmailId']    aarthi
+    Input Text    xpath=.//*[@id='phno']    98754677677
+    Input Text    xpath=.//*[@id='customerAddress']    123
+    Click Button    xpath=.//*[@id='command']/table/tbody/tr[6]/td/input
+
+Cancel Order
+    Click Element    xpath=.//*[@id='command']/input[4]
+
+Order Tracking
+    Page Should Contain Element    xpath=html/body/table/tbody/tr[4]/td/ul/li    Order Processed
+    Sleep    2 min
+    Reload Page
+    Page Should Contain Element    xpath=html/body/table/tbody/tr[4]/td/ul/li    Order Shipped
+    Sleep    1 min
+    Reload Page
+    Page Should Contain Element    xpath=html/body/table/tbody/tr[4]/td/ul/li    Order Delivered
+    Sleep    1 min
+
+Logout
+    Click Element    xpath=.//*[@id='nav']/ul/li[2]/a
